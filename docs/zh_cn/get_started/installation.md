@@ -35,64 +35,23 @@
    pip install -e .
    ```
 
-3. 安装 humaneval（可选）：
+3. 如果需要使用推理后端，或者进行 API 模型测试，或者进行 代码、智能体、主观 等数据集的评测，请参考 [其他安装说明](./extra-installation.md)
 
-   如果你需要**在 humaneval 数据集上评估模型代码能力**，请执行此步骤，否则忽略这一步。
+## 数据集准备
 
-   <details>
-   <summary><b>点击查看详细</b></summary>
-
-   ```bash
-   git clone https://github.com/openai/human-eval.git
-   cd human-eval
-   pip install -r requirements.txt
-   pip install -e .
-   cd ..
-   ```
-
-   请仔细阅读 `human_eval/execution.py` **第48-57行**的注释，了解执行模型生成的代码可能存在的风险，如果接受这些风险，请取消**第58行**的注释，启用代码执行评测。
-
-   </details>
-
-4. 安装 Llama（可选）：
-
-   如果你需要**使用官方实现评测 Llama / Llama-2 / Llama-2-chat 模型**，请执行此步骤，否则忽略这一步。
-
-   <details>
-   <summary><b>点击查看详细</b></summary>
-
-   ```bash
-   git clone https://github.com/facebookresearch/llama.git
-   cd llama
-   pip install -r requirements.txt
-   pip install -e .
-   cd ..
-   ```
-
-   你可以在 `configs/models` 下找到所有 Llama / Llama-2 / Llama-2-chat 模型的配置文件示例。([示例](https://github.com/open-compass/opencompass/blob/eb4822a94d624a4e16db03adeb7a59bbd10c2012/configs/models/llama2_7b_chat.py))
-
-   </details>
-
-5. 安装 alpaca-eval（可选）：
-
-   如果你需要**使用官方alpaca-eval实现评测 alpaca-eval 数据集**，请执行此步骤，否则忽略这一步。
-
-   <details>
-   <summary><b>点击查看详细</b></summary>
-
-   ```bash
-   pip install alpaca-eval
-   ```
-
-   </details>
-
-# 数据集准备
-
-OpenCompass 支持的数据集主要包括两个部分：
+OpenCompass 支持的数据集主要包括三个部分：
 
 1. Huggingface 数据集： [Huggingface Dataset](https://huggingface.co/datasets) 提供了大量的数据集，这部分数据集运行时会**自动下载**。
 
-2. 自建以及第三方数据集：OpenCompass 还提供了一些第三方数据集及自建**中文**数据集。运行以下命令**手动下载解压**。
+2. ModelScope 数据集：[ModelScope OpenCompass Dataset](https://modelscope.cn/organization/opencompass) 支持从 ModelScope 自动下载数据集。
+
+   要启用此功能，请设置环境变量：`export DATASET_SOURCE=ModelScope`，可用的数据集包括（来源于 OpenCompassData-core.zip）：
+
+   ```plain
+   humaneval, triviaqa, commonsenseqa, tydiqa, strategyqa, cmmlu, lambada, piqa, ceval, math, LCSTS, Xsum, winogrande, openbookqa, AGIEval, gsm8k, nq, race, siqa, mbpp, mmlu, hellaswag, ARC, BBH, xstory_cloze, summedits, GAOKAO-BENCH, OCNLI, cmnli
+   ```
+
+3. 自建以及第三方数据集：OpenCompass 还提供了一些第三方数据集及自建**中文**数据集。运行以下命令**手动下载解压**。
 
 在 OpenCompass 项目根目录下运行下面命令，将数据集准备至 `${OpenCompass}/data` 目录下：
 
